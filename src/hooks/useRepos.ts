@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../variables';
 
 function useRepos(username: string | undefined) {
-    const [repos, setRepos] = useState({});
+    const [repos, setRepos] = useState([]);
 
     useEffect(() => {
         async function fetchRepos() {
