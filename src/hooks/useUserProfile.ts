@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
+import { api } from '../variables';
+
 function useUserProfile() {
     const [username, setUsername] = useState('mateusz-bielak');
     const [userProfile, setUserProfile] = useState({});
 
     useEffect(() => {
         async function fetchUserProfile() {
-            const profile = await fetch(`https://api.github.com/users/${username}`).then(res =>
-                res.json(),
-            );
+            const profile = await fetch(`${api}users/${username}`).then(res => res.json());
 
             setUserProfile(profile);
         }
