@@ -1,21 +1,22 @@
 import React from 'react';
 
 import './App.css';
-import Input from './components/Input';
+import Form from './components/Form';
 import useRepos from './hooks/useRepos';
 import useUserProfile from './hooks/useUserProfile';
 
 interface UseUserProfile {
+    setUsername: React.Dispatch<React.SetStateAction<string>>;
     userProfile: { login?: string };
 }
 
 const App: React.FC = () => {
-    const { userProfile }: UseUserProfile = useUserProfile();
+    const { setUsername, userProfile }: UseUserProfile = useUserProfile();
     useRepos(userProfile.login);
 
     return (
         <div className="App">
-            <Input />
+            <Form onSubmit={setUsername} />
         </div>
     );
 };
