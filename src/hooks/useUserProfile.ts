@@ -2,13 +2,27 @@ import { useEffect, useState } from 'react';
 
 import { api } from '../variables';
 
+interface UserProfile {
+    bio: string;
+    id: number | null;
+    login: string;
+    name: string;
+}
+
+const defaultUserProfile = {
+    bio: '',
+    id: null,
+    login: '',
+    name: '',
+};
+
 function useUserProfile() {
-    const [username, setUsername] = useState('mateusz-bielak');
-    const [userProfile, setUserProfile] = useState({});
+    const [username, setUsername] = useState('');
+    const [userProfile, setUserProfile] = useState<UserProfile>(defaultUserProfile);
 
     useEffect(() => {
         async function fetchUserProfile() {
-            const profile = await fetch(`${api}users/${username}`).then(res => res.json());
+            const profile: UserProfile = await fetch(`${api}users/${username}`).then(res => res.json());
 
             setUserProfile(profile);
         }

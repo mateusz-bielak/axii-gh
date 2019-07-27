@@ -10,7 +10,7 @@ const Form = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
                 onSubmit(value);
             }}
         >
-            <label>Type GitHub username:</label>
+            <label>Input github username:</label>
             <input
                 type="text"
                 name="username"

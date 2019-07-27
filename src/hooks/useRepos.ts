@@ -9,24 +9,27 @@ export interface Repo {
     stargazers_count: number;
 }
 
-function useRepos(username: string | undefined) {
+function useRepos(username?: string) {
     const [repos, setRepos] = useState<Repo[]>([]);
+    const [fetchingRepos, setFetchingRepos] = useState(false);
 
     useEffect(() => {
         async function fetchRepos() {
+            setFetchingRepos(true);
+
             const rawRepos: Repo[] = await fetch(`${api}users/${username}/repos`).then(res =>
                 res.json(),
             );
-
             const repos = sortAndGetTopRepos(rawRepos);
 
+            setFetchingRepos(false);
             setRepos(repos);
         }
 
         username && fetchRepos();
     }, [username]);
 
-    return repos;
+    return { fetchingRepos, repos };
 }
 
 export default useRepos;
