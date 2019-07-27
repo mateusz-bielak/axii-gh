@@ -17,6 +17,7 @@ const Form = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
                 value={value}
                 onChange={({ target: { value } }) => setValue(value)}
             />
+            <button type="submit">Search</button>
         </form>
     );
 };

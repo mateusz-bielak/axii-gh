@@ -2,7 +2,7 @@ import React from 'react';
 
 import './App.css';
 import Form from './components/Form';
-import useRepos from './hooks/useRepos';
+import useRepos, { Repo } from './hooks/useRepos';
 import useUserProfile from './hooks/useUserProfile';
 
 interface UseUserProfile {
@@ -12,7 +12,7 @@ interface UseUserProfile {
 
 const App: React.FC = () => {
     const { setUsername, userProfile }: UseUserProfile = useUserProfile();
-    const repos: { id: string }[] = useRepos(userProfile.login);
+    const repos: Repo[] = useRepos(userProfile.login);
 
     return (
         <div className="App">
@@ -23,8 +23,8 @@ const App: React.FC = () => {
                     <p>Bio: {userProfile.bio}</p>
                 </>
             )}
-            {repos.slice(0, 3).map(repo => (
-                <p key={repo.id}>{repo.id}</p>
+            {repos.map(repo => (
+                <p key={repo.id}>{repo.name}</p>
             ))}
         </div>
     );
