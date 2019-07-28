@@ -2,8 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Avatar,
+    Box,
     Card,
     CardContent,
+    CircularProgress,
     Grid,
     Link,
     List,
@@ -25,6 +27,12 @@ const useStyles = makeStyles(theme => ({
             height: 'auto',
             width: 'auto',
         },
+    },
+    box: {
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     card: {
         backgroundColor: ' #F8F8FF',
@@ -62,7 +70,9 @@ const UserCard = ({
                     </Grid>
                     <Grid className={classes.repos} item xs={12} sm={8} md={9}>
                         {fetchingRepos ? (
-                            <p>Loading...</p>
+                            <Box className={classes.box}>
+                                <CircularProgress />
+                            </Box>
                         ) : repos.length ? (
                             <List
                                 disablePadding
@@ -91,7 +101,7 @@ const UserCard = ({
                                 ))}
                             </List>
                         ) : (
-                            <p>No repos</p>
+                            <Typography color="textSecondary">No repositories</Typography>
                         )}
                     </Grid>
                 </Grid>

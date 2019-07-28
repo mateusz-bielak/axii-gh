@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '../variables';
+import { handleErrors } from '../helpers';
 
 export interface UserProfile {
     avatar_url: string;
@@ -19,20 +20,26 @@ const defaultUserProfile = {
 };
 
 function useUserProfile() {
-    const [username, setUsername] = useState('mateusz-bielak');
+    const [username, setUsername] = useState('');
     const [userProfile, setUserProfile] = useState<UserProfile>(defaultUserProfile);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function fetchUserProfile() {
-            const profile: UserProfile = await fetch(`${api}users/${username}`).then(res => res.json());
+            try {
+                const profile: UserProfile = await fetch(`${api}users/${username}`).then(handleErrors);
 
-            setUserProfile(profile);
+                setUserProfile(profile);
+                setError(false);
+            } catch {
+                setError(true);
+            }
         }
 
         username && fetchUserProfile();
     }, [username]);
 
-    return { setUsername, userProfile };
+    return { error, setUsername, userProfile };
 }
 
 export default useUserProfile;

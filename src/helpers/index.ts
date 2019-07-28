@@ -6,3 +6,11 @@ export function sortAndGetTopRepos(repos: Repo[], amount = 3) {
 
     return topRepos;
 }
+
+export function handleErrors(response: Response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+
+    return response.json();
+}

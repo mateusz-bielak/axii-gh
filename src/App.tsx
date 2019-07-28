@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Form from './components/Form';
@@ -11,10 +11,13 @@ const useStyles = makeStyles(theme => ({
     container: {
         marginTop: theme.spacing(3),
     },
+    paper: {
+        padding: theme.spacing(3),
+    },
 }));
 
 const App: React.FC = () => {
-    const { setUsername, userProfile } = useUserProfile();
+    const { error, setUsername, userProfile } = useUserProfile();
     const { fetchingRepos, repos } = useRepos(userProfile && userProfile.login);
 
     const classes = useStyles();
@@ -33,7 +36,13 @@ const App: React.FC = () => {
                             userProfile={userProfile}
                         />
                     ) : (
-                        <p>Browse users by typing username above</p>
+                        <Paper className={classes.paper}>
+                            <Typography color="textSecondary">
+                                {error
+                                    ? 'Oops, something went wrong. Please, try again.'
+                                    : 'Search user by typing Github username'}
+                            </Typography>
+                        </Paper>
                     )}
                 </Grid>
             </Grid>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '../variables';
-import { sortAndGetTopRepos } from '../helpers';
+import { sortAndGetTopRepos, handleErrors } from '../helpers';
 
 export interface Repo {
     description: string;
@@ -17,15 +17,19 @@ function useRepos(username?: string) {
 
     useEffect(() => {
         async function fetchRepos() {
-            setFetchingRepos(true);
+            try {
+                setFetchingRepos(true);
 
-            const rawRepos: Repo[] = await fetch(`${api}users/${username}/repos`).then(res =>
-                res.json(),
-            );
-            const repos = sortAndGetTopRepos(rawRepos);
+                const rawRepos: Repo[] = await fetch(`${api}users/${username}sdwedwedwxs/repos`).then(
+                    handleErrors,
+                );
+                const repos = sortAndGetTopRepos(rawRepos);
 
-            setFetchingRepos(false);
-            setRepos(repos);
+                setFetchingRepos(false);
+                setRepos(repos);
+            } catch {
+                setFetchingRepos(false);
+            }
         }
 
         username && fetchRepos();
