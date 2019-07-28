@@ -4,6 +4,7 @@ import {
     Avatar,
     Card,
     CardContent,
+    Grid,
     Link,
     List,
     ListItemText,
@@ -14,23 +15,26 @@ import {
 import { UserProfile } from '../hooks/useUserProfile';
 import { Repo } from '../hooks/useRepos';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     avatar: {
-        height: 160,
-        width: 160,
-        marginBottom: 8,
+        height: 192,
+        width: 192,
+        margin: `0 auto ${theme.spacing(3)}px auto`,
+
+        [theme.breakpoints.up('sm')]: {
+            height: 'auto',
+            width: 'auto',
+        },
     },
     card: {
-        display: 'flex',
         backgroundColor: ' #F8F8FF',
     },
-    link: {
-        display: 'block',
+    repos: {
+        [theme.breakpoints.up('sm')]: {
+            paddingLeft: theme.spacing(3),
+        },
     },
-    profile: {
-        maxWidth: '30%',
-    },
-});
+}));
 
 const UserCard = ({
     fetchingRepos,
@@ -45,40 +49,52 @@ const UserCard = ({
 
     return (
         <Card className={classes.card}>
-            <CardContent className={classes.profile}>
-                <Avatar alt={userProfile.name} className={classes.avatar} src={userProfile.avatar_url} />
-                <Typography variant="h5">{userProfile.name}</Typography>
-                <Typography variant="body2">{userProfile.bio}</Typography>
-            </CardContent>
             <CardContent>
-                {fetchingRepos ? (
-                    <p>Loading...</p>
-                ) : repos.length ? (
-                    <List
-                        disablePadding
-                        subheader={
-                            <ListSubheader color="inherit" disableGutters>
-                                Repositories
-                            </ListSubheader>
-                        }
-                    >
-                        {repos.map(repo => (
-                            <ListItemText
-                                key={repo.id}
-                                primary={
-                                    <>
-                                        <Link href={repo.html_url} target="_blank" rel="noopener">
-                                            {repo.name}
-                                        </Link>
-                                        {repo.description && ` - ${repo.description}`}
-                                    </>
+                <Grid container>
+                    <Grid item xs={12} sm={4} md={3}>
+                        <Avatar
+                            alt={userProfile.name}
+                            className={classes.avatar}
+                            src={userProfile.avatar_url}
+                        />
+                        <Typography variant="h5">{userProfile.name}</Typography>
+                        <Typography variant="body2">{userProfile.bio}</Typography>
+                    </Grid>
+                    <Grid className={classes.repos} item xs={12} sm={8} md={9}>
+                        {fetchingRepos ? (
+                            <p>Loading...</p>
+                        ) : repos.length ? (
+                            <List
+                                disablePadding
+                                subheader={
+                                    <ListSubheader color="inherit" disableGutters>
+                                        Repositories
+                                    </ListSubheader>
                                 }
-                            />
-                        ))}
-                    </List>
-                ) : (
-                    <p>No repos</p>
-                )}
+                            >
+                                {repos.map(repo => (
+                                    <ListItemText
+                                        key={repo.id}
+                                        primary={
+                                            <>
+                                                <Link
+                                                    href={repo.html_url}
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                >
+                                                    {repo.name}
+                                                </Link>
+                                                {repo.description && ` - ${repo.description}`}
+                                            </>
+                                        }
+                                    />
+                                ))}
+                            </List>
+                        ) : (
+                            <p>No repos</p>
+                        )}
+                    </Grid>
+                </Grid>
             </CardContent>
         </Card>
     );
