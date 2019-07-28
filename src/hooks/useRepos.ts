@@ -4,6 +4,7 @@ import { api } from '../variables';
 import { sortAndGetTopRepos } from '../helpers';
 
 export interface Repo {
+    description: string;
     html_url: string;
     id: number;
     name: string;

@@ -14,7 +14,7 @@ const Form = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
         >
             <TextField
                 id="username"
-                label="Username:"
+                label="Github username:"
                 value={value}
                 onChange={({ target: { value } }) => setValue(value)}
             />
