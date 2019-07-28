@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const Form = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
     const [value, setValue] = useState('');
@@ -10,14 +12,15 @@ const Form = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
                 onSubmit(value);
             }}
         >
-            <label>Input github username:</label>
-            <input
-                type="text"
-                name="username"
+            <TextField
+                id="username"
+                label="Username:"
                 value={value}
                 onChange={({ target: { value } }) => setValue(value)}
             />
-            <button type="submit">Search</button>
+            <Button variant="contained" type="submit">
+                Submit
+            </Button>
         </form>
     );
 };

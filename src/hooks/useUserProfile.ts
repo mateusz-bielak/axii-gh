@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { api } from '../variables';
 
-interface UserProfile {
+export interface UserProfile {
+    avatar_url: string;
     bio: string;
     id: number | null;
     login: string;
@@ -10,6 +11,7 @@ interface UserProfile {
 }
 
 const defaultUserProfile = {
+    avatar_url: '',
     bio: '',
     id: null,
     login: '',
@@ -17,7 +19,7 @@ const defaultUserProfile = {
 };
 
 function useUserProfile() {
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('mateusz-bielak');
     const [userProfile, setUserProfile] = useState<UserProfile>(defaultUserProfile);
 
     useEffect(() => {
