@@ -22,7 +22,7 @@ const App: React.FC = () => {
     return (
         <Container className={classes.container} maxWidth="md">
             <Grid container spacing={3}>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12}>
                     <Form onSubmit={setUsername} />
                 </Grid>
                 <Grid item xs={12}>
