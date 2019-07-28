@@ -1,21 +1,21 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    Avatar,
-    Box,
-    Card,
-    CardContent,
-    CircularProgress,
-    Grid,
-    Link,
-    List,
-    ListItemText,
-    Typography,
-    ListSubheader,
-} from '@material-ui/core';
+import { Avatar, Card, CardContent, Grid, Typography } from '@material-ui/core';
 
+import ReposList from './ReposList';
 import { UserProfile } from '../hooks/useUserProfile';
 import { Repo } from '../hooks/useRepos';
+
+interface UserDescriptionProps {
+    avatarClassName: string;
+    userProfile: UserProfile;
+}
+
+interface UserCardProps {
+    fetchingRepos: boolean;
+    repos: Repo[];
+    userProfile: UserProfile;
+}
 
 const useStyles = makeStyles(theme => ({
     avatar: {
@@ -28,12 +28,6 @@ const useStyles = makeStyles(theme => ({
             width: 'auto',
         },
     },
-    box: {
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     card: {
         backgroundColor: ' #F8F8FF',
     },
@@ -44,15 +38,15 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const UserCard = ({
-    fetchingRepos,
-    repos,
-    userProfile,
-}: {
-    fetchingRepos: boolean;
-    repos: Repo[];
-    userProfile: UserProfile;
-}) => {
+const UserDescription: React.FC<UserDescriptionProps> = ({ avatarClassName, userProfile }) => (
+    <>
+        <Avatar alt={userProfile.name} className={avatarClassName} src={userProfile.avatar_url} />
+        <Typography variant="h5">{userProfile.name}</Typography>
+        <Typography variant="body2">{userProfile.bio}</Typography>
+    </>
+);
+
+const UserCard = ({ fetchingRepos, repos, userProfile }: UserCardProps) => {
     const classes = useStyles();
 
     return (
@@ -60,49 +54,10 @@ const UserCard = ({
             <CardContent>
                 <Grid container>
                     <Grid item xs={12} sm={4} md={3}>
-                        <Avatar
-                            alt={userProfile.name}
-                            className={classes.avatar}
-                            src={userProfile.avatar_url}
-                        />
-                        <Typography variant="h5">{userProfile.name}</Typography>
-                        <Typography variant="body2">{userProfile.bio}</Typography>
+                        <UserDescription avatarClassName={classes.avatar} userProfile={userProfile} />
                     </Grid>
                     <Grid className={classes.repos} item xs={12} sm={8} md={9}>
-                        {fetchingRepos ? (
-                            <Box className={classes.box}>
-                                <CircularProgress />
-                            </Box>
-                        ) : repos.length ? (
-                            <List
-                                disablePadding
-                                subheader={
-                                    <ListSubheader color="inherit" disableGutters>
-                                        Repositories
-                                    </ListSubheader>
-                                }
-                            >
-                                {repos.map(repo => (
-                                    <ListItemText
-                                        key={repo.id}
-                                        primary={
-                                            <>
-                                                <Link
-                                                    href={repo.html_url}
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                >
-                                                    {repo.name}
-                                                </Link>
-                                                {repo.description && ` - ${repo.description}`}
-                                            </>
-                                        }
-                                    />
-                                ))}
-                            </List>
-                        ) : (
-                            <Typography color="textSecondary">No repositories</Typography>
-                        )}
+                        <ReposList fetchingRepos={fetchingRepos} repos={repos} />
                     </Grid>
                 </Grid>
             </CardContent>

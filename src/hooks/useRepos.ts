@@ -20,9 +20,7 @@ function useRepos(username?: string) {
             try {
                 setFetchingRepos(true);
 
-                const rawRepos: Repo[] = await fetch(`${api}users/${username}sdwedwedwxs/repos`).then(
-                    handleErrors,
-                );
+                const rawRepos: Repo[] = await fetch(`${api}users/${username}/repos`).then(handleErrors);
                 const repos = sortAndGetTopRepos(rawRepos);
 
                 setFetchingRepos(false);

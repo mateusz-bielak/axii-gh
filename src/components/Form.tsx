@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Button, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+interface FormProps {
+    onSubmit: (value: string) => void;
+}
+
 const useStyles = makeStyles(theme => ({
     button: {
         display: 'flex',
@@ -10,17 +14,17 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Form = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
+const Form: React.FC<FormProps> = ({ onSubmit }) => {
     const [value, setValue] = useState('');
     const classes = useStyles();
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        onSubmit(value);
+    };
+
     return (
-        <form
-            onSubmit={event => {
-                event.preventDefault();
-                onSubmit(value);
-            }}
-        >
+        <form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs sm={6} md={4}>
                     <TextField
