@@ -11,12 +11,16 @@ export interface Repo {
     stargazers_count: number;
 }
 
-function useRepos(username?: string) {
+function useRepos(username = '') {
     const [repos, setRepos] = useState<Repo[]>([]);
     const [fetchingRepos, setFetchingRepos] = useState(false);
 
     useEffect(() => {
         async function fetchRepos() {
+            if (!username) {
+                return;
+            }
+
             try {
                 setFetchingRepos(true);
 
