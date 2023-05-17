@@ -3,15 +3,15 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@material-ui/core": "^4.2.1",
-        "@types/jest": "24.0.15",
-        "@types/node": "12.6.8",
-        "@types/react": "16.8.23",
-        "@types/react-dom": "16.8.5",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "react-scripts": "3.0.1",
-        "typescript": "3.5.3"
+        "@material-ui/core": "^4.12.4",
+        "@types/jest": "29.5.1",
+        "@types/node": "20.1.7",
+        "@types/react": "18.2.6",
+        "@types/react-dom": "18.2.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "typescript": "5.0.4"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -35,11 +35,11 @@
         ]
     },
     "devDependencies": {
-        "@testing-library/react": "^9.3.0",
-        "@testing-library/react-hooks": "^2.0.3",
-        "@types/fetch-mock": "^7.3.1",
-        "fetch-mock": "^7.5.1",
-        "node-fetch": "^2.6.1",
-        "react-test-renderer": "^16.10.2"
+        "@testing-library/react": "^14.0.0",
+        "@testing-library/react-hooks": "^8.0.1",
+        "@types/fetch-mock": "^7.3.5",
+        "fetch-mock": "^9.11.0",
+        "node-fetch": "^3.3.1",
+        "react-test-renderer": "^18.2.0"
     }
 }
