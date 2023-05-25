@@ -1,10 +1,10 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Avatar, Card, CardContent, Grid, Typography } from "@material-ui/core";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Avatar, Card, CardContent, Grid, Typography } from '@material-ui/core';
 
-import ReposList from "./ReposList";
-import { UserProfile } from "../hooks/useUserProfile";
-import { Repo } from "../hooks/useRepos";
+import ReposList from './ReposList';
+import { UserProfile } from '../hooks/useUserProfile';
+import { Repo } from '../hooks/useRepos';
 
 interface UserDescriptionProps {
   avatarClassName: string;
@@ -23,16 +23,16 @@ const useStyles = makeStyles(theme => ({
     width: 192,
     margin: `0 auto ${theme.spacing(3)}px auto`,
 
-    [theme.breakpoints.up("sm")]: {
-      height: "auto",
-      width: "auto",
+    [theme.breakpoints.up('sm')]: {
+      height: 'auto',
+      width: 'auto',
     },
   },
   card: {
-    backgroundColor: " #F8F8FF",
+    backgroundColor: ' #F8F8FF',
   },
   repos: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(3),
     },
   },

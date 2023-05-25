@@ -12,7 +12,8 @@
     "start": "vite",
     "build": "vite build",
     "test": "vitest",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "browserslist": {
     "production": [

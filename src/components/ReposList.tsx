@@ -1,8 +1,8 @@
-import React from "react";
-import { Box, CircularProgress, Link, List, ListItemText, Typography, ListSubheader } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { Box, CircularProgress, Link, List, ListItemText, Typography, ListSubheader } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { Repo } from "../hooks/useRepos";
+import { Repo } from '../hooks/useRepos';
 
 interface RepoItemProps {
   repo: Repo;
@@ -15,10 +15,10 @@ interface ReposListProps {
 
 const useStyles = makeStyles({
   box: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

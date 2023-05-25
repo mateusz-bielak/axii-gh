@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { api } from "../variables";
-import { sortAndGetTopRepos, handleErrors } from "../helpers";
+import { api } from '../variables';
+import { sortAndGetTopRepos, handleErrors } from '../helpers';
 
 export interface Repo {
   description: string;
@@ -11,7 +11,7 @@ export interface Repo {
   stargazers_count: number;
 }
 
-function useRepos(username = "") {
+function useRepos(username = '') {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [fetchingRepos, setFetchingRepos] = useState(false);
 

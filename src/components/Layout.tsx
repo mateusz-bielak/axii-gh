@@ -1,11 +1,11 @@
-import React from "react";
-import { Container, Grid, Paper, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { Container, Grid, Paper, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import Form from "./Form";
-import UserCard from "./UserCard";
-import { Repo } from "../hooks/useRepos";
-import { UserProfile } from "../hooks/useUserProfile";
+import Form from './Form';
+import UserCard from './UserCard';
+import { Repo } from '../hooks/useRepos';
+import { UserProfile } from '../hooks/useUserProfile';
 
 interface LayoutProps {
   error: boolean;
@@ -39,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ error, fetchingRepos, repos, setUsernam
           ) : (
             <Paper className={classes.paper}>
               <Typography color="textSecondary">
-                {error ? "Oops, something went wrong. Please, try again." : "Search user by typing Github username"}
+                {error ? 'Oops, something went wrong. Please, try again.' : 'Search user by typing Github username'}
               </Typography>
             </Paper>
           )}

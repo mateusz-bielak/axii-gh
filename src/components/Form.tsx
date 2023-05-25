@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Button, Grid, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from 'react';
+import { Button, Grid, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface FormProps {
   onSubmit: (value: string) => void;
@@ -8,14 +8,14 @@ interface FormProps {
 
 const useStyles = makeStyles(theme => ({
   button: {
-    display: "flex",
-    alignItems: "flex-end",
+    display: 'flex',
+    alignItems: 'flex-end',
     paddingLeft: theme.spacing(1),
   },
 }));
 
 const Form: React.FC<FormProps> = ({ onSubmit }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const classes = useStyles();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

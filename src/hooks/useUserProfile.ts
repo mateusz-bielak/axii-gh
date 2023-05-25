@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { api } from "../variables";
-import { handleErrors } from "../helpers";
+import { api } from '../variables';
+import { handleErrors } from '../helpers';
 
 export interface UserProfile {
   avatar_url: string;
@@ -12,15 +12,15 @@ export interface UserProfile {
 }
 
 const defaultUserProfile = {
-  avatar_url: "",
-  bio: "",
+  avatar_url: '',
+  bio: '',
   id: null,
-  login: "",
-  name: "",
+  login: '',
+  name: '',
 };
 
 function useUserProfile() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultUserProfile);
   const [error, setError] = useState(false);
 
