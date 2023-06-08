@@ -1,10 +1,10 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, Card, CardContent, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
+import useUserProfile from '../hooks/useUserProfile';
+import { UserProfile } from '../hooks/useUsersSearch';
 import ReposList from './ReposList';
-import { UserProfile } from '../hooks/useUserProfile';
-import { Repo } from '../hooks/useRepos';
 
 interface UserDescriptionProps {
   avatarClassName: string;
@@ -12,9 +12,7 @@ interface UserDescriptionProps {
 }
 
 interface UserCardProps {
-  fetchingRepos: boolean;
-  repos: Repo[];
-  userProfile: UserProfile;
+  username: string;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     backgroundColor: ' #F8F8FF',
+    marginBottom: theme.spacing(3),
   },
   repos: {
     [theme.breakpoints.up('sm')]: {
@@ -40,14 +39,19 @@ const useStyles = makeStyles(theme => ({
 
 const UserDescription: React.FC<UserDescriptionProps> = ({ avatarClassName, userProfile }) => (
   <>
-    <Avatar alt={userProfile.name} className={avatarClassName} src={userProfile.avatar_url} />
-    <Typography variant="h5">{userProfile.name}</Typography>
+    <Avatar alt={userProfile.login} className={avatarClassName} src={userProfile.avatar_url} />
+    <Typography variant="h5">{userProfile.login}</Typography>
     <Typography variant="body2">{userProfile.bio}</Typography>
   </>
 );
 
-const UserCard = ({ fetchingRepos, repos, userProfile }: UserCardProps) => {
+const UserCard = ({ username }: UserCardProps) => {
+  const { userProfile } = useUserProfile(username);
   const classes = useStyles();
+
+  if (!userProfile) return null;
+
+  console.log(userProfile);
 
   return (
     <Card className={classes.card}>
@@ -57,7 +61,7 @@ const UserCard = ({ fetchingRepos, repos, userProfile }: UserCardProps) => {
             <UserDescription avatarClassName={classes.avatar} userProfile={userProfile} />
           </Grid>
           <Grid className={classes.repos} item xs={12} sm={8} md={9}>
-            <ReposList fetchingRepos={fetchingRepos} repos={repos} />
+            <ReposList userLogin={userProfile.login} />
           </Grid>
         </Grid>
       </CardContent>

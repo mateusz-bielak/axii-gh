@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { api } from '../variables';
 import { handleErrors } from '../helpers';
+import { api } from '../variables';
 
 export interface UserProfile {
   avatar_url: string;
@@ -11,17 +11,8 @@ export interface UserProfile {
   name: string;
 }
 
-const defaultUserProfile = {
-  avatar_url: '',
-  bio: '',
-  id: null,
-  login: '',
-  name: '',
-};
-
-function useUserProfile() {
-  const [username, setUsername] = useState('');
-  const [userProfile, setUserProfile] = useState<UserProfile>(defaultUserProfile);
+function useUserProfile(username = '') {
+  const [userProfile, setUserProfile] = useState<UserProfile>();
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -39,7 +30,7 @@ function useUserProfile() {
     username && fetchUserProfile();
   }, [username]);
 
-  return { error, setUsername, userProfile };
+  return { error, userProfile };
 }
 
 export default useUserProfile;

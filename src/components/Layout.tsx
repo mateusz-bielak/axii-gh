@@ -1,18 +1,14 @@
-import React from 'react';
-import { Container, Grid, Paper, Typography } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import React from 'react';
+import { UserProfile } from '../hooks/useUsersSearch';
 import Form from './Form';
 import UserCard from './UserCard';
-import { Repo } from '../hooks/useRepos';
-import { UserProfile } from '../hooks/useUserProfile';
 
 interface LayoutProps {
   error: boolean;
-  fetchingRepos: boolean;
-  repos: Repo[];
   setUsername: React.Dispatch<React.SetStateAction<string>>;
-  userProfile: UserProfile;
+  userProfiles: UserProfile[];
 }
 
 const useStyles = makeStyles(theme => ({
@@ -24,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Layout: React.FC<LayoutProps> = ({ error, fetchingRepos, repos, setUsername, userProfile }) => {
+const Layout: React.FC<LayoutProps> = ({ error, setUsername, userProfiles }) => {
   const classes = useStyles();
 
   return (
@@ -34,7 +30,10 @@ const Layout: React.FC<LayoutProps> = ({ error, fetchingRepos, repos, setUsernam
           <Form onSubmit={setUsername} />
         </Grid>
         <Grid item xs={12}>
-          {userProfile.id ? (
+          {userProfiles.map(userProfile => (
+            <UserCard key={userProfile.id} username={userProfile.login} />
+          ))}
+          {/* {userProfile.id ? (
             <UserCard fetchingRepos={fetchingRepos} repos={repos} userProfile={userProfile} />
           ) : (
             <Paper className={classes.paper}>
@@ -42,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ error, fetchingRepos, repos, setUsernam
                 {error ? 'Oops, something went wrong. Please, try again.' : 'Search user by typing Github username'}
               </Typography>
             </Paper>
-          )}
+          )} */}
         </Grid>
       </Grid>
     </Container>

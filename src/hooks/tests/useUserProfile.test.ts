@@ -1,7 +1,7 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks';
 import fetchMock from 'fetch-mock';
 
-import useUserProfile, { UserProfile } from '../useUserProfile';
+import useUserProfile, { UserProfile } from '../useUsersSearch';
 
 const mockedUserProfile: UserProfile = {
   avatar_url: 'https://google.com',

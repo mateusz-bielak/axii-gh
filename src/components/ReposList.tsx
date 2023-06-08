@@ -1,16 +1,15 @@
-import React from 'react';
-import { Box, CircularProgress, Link, List, ListItemText, Typography, ListSubheader } from '@material-ui/core';
+import { Box, CircularProgress, Link, List, ListItemText, ListSubheader, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 
-import { Repo } from '../hooks/useRepos';
+import useRepos, { Repo } from '../hooks/useRepos';
 
 interface RepoItemProps {
   repo: Repo;
 }
 
 interface ReposListProps {
-  fetchingRepos: boolean;
-  repos: Repo[];
+  userLogin: string;
 }
 
 const useStyles = makeStyles({
@@ -35,7 +34,8 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => (
   />
 );
 
-const ReposList: React.FC<ReposListProps> = ({ fetchingRepos, repos }) => {
+const ReposList: React.FC<ReposListProps> = ({ userLogin }) => {
+  const { fetchingRepos, repos } = useRepos(userLogin);
   const classes = useStyles();
 
   return fetchingRepos ? (

@@ -1,14 +1,11 @@
 import React from 'react';
-
-import useRepos from './hooks/useRepos';
-import useUserProfile from './hooks/useUserProfile';
 import Layout from './components/Layout';
+import { useUsersSearch } from './hooks/useUsersSearch';
 
 const App: React.FC = () => {
-  const { userProfile, ...rest } = useUserProfile();
-  const repos = useRepos(userProfile && userProfile.login);
+  const { userProfiles, ...rest } = useUsersSearch();
 
-  return <Layout {...repos} {...rest} userProfile={userProfile} />;
+  return <Layout {...rest} userProfiles={userProfiles} />;
 };
 
 export default App;
